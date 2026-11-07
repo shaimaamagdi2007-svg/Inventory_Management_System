@@ -1,0 +1,52 @@
+@model IEnumerable<InventoryManagementSystem.Models.StockTransaction>
+
+@{
+    ViewData["Title"] = "Stock Transactions";
+}
+
+<h1>Stock Transactions</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">
+        Add Transaction
+    </a>
+</p>
+
+<table class="table table-bordered table-striped">
+
+    <thead>
+        <tr>
+            <th>Product</th>
+            <th>Transaction Type</th>
+            <th>Quantity</th>
+            <th>Date</th>
+            <th>Notes</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Product.Name</td>
+                <td>@item.TransactionType</td>
+                <td>@item.Quantity</td>
+                <td>@item.TransactionDate</td>
+                <td>@item.Notes</td>
+
+                <td>
+
+                    <a asp-action="Delete"
+                       asp-route-id="@item.TransactionId"
+                       class="btn btn-danger btn-sm">
+                        Delete
+                    </a>
+                </td>
+            </tr>
+        }
+
+    </tbody>
+
+</table>

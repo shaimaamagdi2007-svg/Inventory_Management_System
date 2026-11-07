@@ -1,0 +1,18 @@
+﻿@if (!User.Identity.IsAuthenticated)
+{
+<div class="text-center">
+        <h2>Welcome to the Inventory Management System</h2>
+        <div class="text-center">
+            <a asp-action="Login" asp-controller="Account" class="btn btn-primary">Login</a>
+            <div class="mx-2">Or</div>
+            <a asp-action="Register" asp-controller="Account" class="btn btn-secondary">Create Account</a>
+        </div>
+</div>
+}
+else
+{
+    <div class="text-center">
+        <h2>Welcome back, @User.Identity.Name!</h2>
+        <p>You are logged in and can manage your inventory.</p>
+    </div>
+}

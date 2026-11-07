@@ -1,0 +1,16 @@
+﻿@model InventoryManagementSystem.ViewModels.SignOutViewModel
+
+<h2>Are you sure you want to log out?</h2>
+<form asp-action="SaveSignOut" method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="form-group">
+        <button type="submit" name="IsSignedOut" class="btn btn-danger" value="true">Log Out</button>
+        <button type="submit" name="IsSignedOut" class="btn btn-secondary" value="false">Cancel</button>    
+    </div>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

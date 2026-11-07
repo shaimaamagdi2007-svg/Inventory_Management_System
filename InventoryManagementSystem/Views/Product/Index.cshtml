@@ -1,0 +1,117 @@
+@model IEnumerable<InventoryManagementSystem.Models.Product>
+
+@{
+    ViewData["Title"] = "Products";
+}
+
+<h1>Products</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Add Product</a>
+</p>
+
+<form asp-action="Index" method="get" class="row g-3 mb-4">
+
+    <div class="col-md-4">
+        <input type="text"
+               name="searchString"
+               class="form-control"
+               placeholder="Search Product..."
+               value="@Context.Request.Query["searchString"]" />
+    </div>
+
+    <div class="col-md-3">
+        <select name="categoryId" class="form-select"
+          @* asp-items="ViewBag.Categories" *@
+        >
+            <option value="">Select Category</option>
+           
+            @if (ViewBag.Categories != null)
+                {
+                    @foreach (var category in ViewBag.Categories)
+                    {
+                        <option value="@category.Id">
+                            @category.Name
+                        </option>
+                    }
+
+                }
+            </select>
+    </div>
+
+    <div class="col-md-3">
+        <select name="supplierId" class="form-select">
+            <option value="">Select Supplier</option>
+            @if (ViewBag.Suppliers != null)
+            {
+            @foreach (var supplier in ViewBag.Suppliers)
+            {
+                <option value="@supplier.Id">
+                    @supplier.Name
+                </option>
+            }
+            }
+        </select>
+    </div>
+
+    <div class="col-md-2">
+        <button type="submit" class="btn btn-success w-100">
+            Search
+        </button>
+    </div>
+
+</form>
+
+<table class="table table-bordered table-striped">
+
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Reorder Level</th>
+            <th>Category</th>
+            <th>Supplier</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.Description</td>
+                <td>@item.Price</td>
+                <td>@item.Quantity</td>
+                <td>@item.RecorderLevel</td>
+                <td>@item.Category.Name</td>
+                <td>@item.Supplier.Name</td>
+
+                <td>
+                    <a asp-action="Details"
+                       asp-route-id="@item.Id"
+                       class="btn btn-info btn-sm">
+                        Details
+                    </a>
+
+                    <a asp-action="Edit"
+                       asp-route-id="@item.Id"
+                       class="btn btn-warning btn-sm">
+                        Edit
+                    </a>
+
+                    <a asp-action="Delete"
+                       asp-route-id="@item.Id"
+                       class="btn btn-danger btn-sm">
+                        Delete
+                    </a>
+                </td>
+            </tr>
+        }
+
+    </tbody>
+
+</table>
